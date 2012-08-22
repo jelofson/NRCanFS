@@ -1,0 +1,70 @@
+curl -XGET 'http://localhost:9200/cfs/publications/_search?pretty=true' -d '{
+    "query": {
+        "filtered" : {
+            "query" : {
+                "query_string" : {
+                    "query" : "mountain pine"
+                }
+            },
+            "filter" : {
+                "range" : {
+                    "year" : {"from" : 2001, "to" : 2003}
+                }
+            }
+        }
+    },
+    "sort" : {
+        "authors.sortable" : {}
+    }
+}'
+
+curl -XPUT http://localhost:9200/cfs/publications/_mapping -d '
+{
+    "publications" : {
+        "properties" : {
+            "authors" : {
+                "type" : "multi_field",
+                    "fields" : {
+                        "authors" : {
+                            "type" : "string"
+                        },
+                        "sortable" : {
+                            "include_in_all" : false,
+                            "index" : "not_analyzed",
+                            "type" : "string"
+                        }
+                    }
+            }
+        }
+    }
+}'
+
+
+curl -s -XGET http://localhost:9200/cfs/publications/_search -d '
+{
+    "sort": [ { "title.sortable" : "asc" } ],
+        "fields": ["title"],
+        "query" : {
+            "query_string": {
+                "query": "beetle",
+                "fields": [ "title" ]
+            }
+        }
+}'
+
+http://geogratis.gc.ca/api/en/nrcan-rncan/ess-sst/-/(urn:iso:type)documentdigital-documentnumerique?max-results=100&entry-type=full&alt=json
+/*
+"language": "eng; CAN",
+    "encoding": "utf8; utf8",
+    "createdDate": "",
+    "updatedDate": "2012-03-19",
+    "citation": {
+        "title": "National geochemical reconnaissance release NGR 1-76 regional lake sediment geochemical reconnaissance data eastern Ontario",
+        "alternateTitle": "",
+        "author": "Natural Resources Canada",
+        "publicationDate": "1977-01-01",
+        "presentationForm": "documentDigital; documentNumérique mapDigital; carteNumérique",
+        "series": "Geological Survey of Canada, Open File",
+        "seriesIssue": "405"
+    
+*/
