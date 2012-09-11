@@ -248,7 +248,7 @@ function getPageList($page, $pages) {
 
 <head>
     <meta charset="utf-8" />
-    <title>Federated Search via ElasticSearch</title>
+    <title>Federated Search Prototype</title>
     <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="../bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
     
@@ -281,7 +281,7 @@ function getPageList($page, $pages) {
         </div>
     </div>
     <div class="container">
-        <h2>Federated Search via ElasticSearch</h2>
+        <h2>NRCan Federated Search</h2>
         
         <form id="search" method="get">
         
