@@ -21,6 +21,7 @@ foreach ($result as $pub) {
     $data = array(
         'id'=>$pub['id'],
         'title'=>$pub['title'],
+        'title_fr'=>$pub['title'],
         'centre'=>$pub['centre_centre_id'],
         'keywords'=>$pub['keywords'],
         'body'=>$pub['abstract_en'] . ' ' . $pub['abstract_fr'],

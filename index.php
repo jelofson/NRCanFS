@@ -6,6 +6,8 @@ $valid_idx = array(
     'geogratis-documents'=>'GEOGRATIS Documents',
     'geogratis-maps'=>'GEOGRATIS Maps',
     'ess-publications'=>'ESS 2012 Publications',
+    'ess-publications'=>'ESS 2012 Publications',
+    'iets-publications'=>'IETS Publications (sharepoint)',
     //'cfs-page'=>'CFS Web Pages',
     //'cfs-project'=>'CFS Projects',
     //'cfs-employee'=>'CFS Employees'
@@ -55,8 +57,8 @@ if (! $date_to) {
     $date_to = null;
 }
 
-$query  = isset($_GET['q']) ? htmlentities($_GET['q'], ENT_QUOTES, 'UTF-8') : '';
-
+//$query  = isset($_GET['q']) ? htmlentities($_GET['q'], ENT_QUOTES, 'UTF-8') : '';
+$query = isset($_GET['q']) ? $_GET['q'] : '';
 $results = false;
 
 if (! empty($query) && ! empty($idx)) {
@@ -275,8 +277,13 @@ function getPageList($page, $pages) {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="brand" href="#">NRCan Federated Search</a>
-                
+                <a class="brand" href="index.php">NRCan Federated Search</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                      <li><a href="about.php">About</a></li>
+                      <li><a href="mailto:jelofson@nrcan.gc.ca">Contact</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
             </div>
         </div>
     </div>
@@ -325,6 +332,12 @@ function getPageList($page, $pages) {
                         <label class="checkbox" for="idx-ess-publications">
                             <input type="checkbox" name="index[]" value="ess-publications" id="idx-ess-publications" <?php echo in_array('ess-publications', $idx) ? 'checked="checked"' : ''; ?>/>
                             ESS 2012 Publications
+                        </label>
+                    </div>
+                    <div>
+                        <label class="checkbox" for="idx-iets-publications">
+                            <input type="checkbox" name="index[]" value="iets-publications" id="idx-iets-publications" <?php echo in_array('iets-publications', $idx) ? 'checked="checked"' : ''; ?>/>
+                            IETS Publications (Sharepoint)
                         </label>
                     </div>
                 </fieldset>

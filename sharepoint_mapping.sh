@@ -1,6 +1,6 @@
 #!/bin/bash
 
-curl -XPUT http://localhost:9200/cfs/ -d '
+curl -XPUT http://localhost:9200/iets/ -d '
 {
     "index": {
         "analysis": {
@@ -14,9 +14,9 @@ curl -XPUT http://localhost:9200/cfs/ -d '
     }
 }'
 
-curl -XPUT http://localhost:9200/cfs/publications/_mapping -d '
+curl -XPUT http://localhost:9200/iets/documents/_mapping -d '
 {
-    "publications" : {
+    "documents" : {
         "properties" : {
             "title" : {
                 "type" : "multi_field",
@@ -25,12 +25,6 @@ curl -XPUT http://localhost:9200/cfs/publications/_mapping -d '
                             "type" : "string",
                             "store" : "yes",
                             "term_vector" : "with_positions_offsets"
-                        },
-                        "title_fr" : {
-                            "type" : "string",
-                            "store" : "yes",
-                            "term_vector" : "with_positions_offsets",
-                            "analyzer" : "french"
                         },
                         "sortable" : {
                             "include_in_all" : false,
@@ -60,12 +54,8 @@ curl -XPUT http://localhost:9200/cfs/publications/_mapping -d '
             "year" : {
                 "type" : "date",
                 "format" : "YYYY"
-                
-            },
-            "date_added" : {
-                "type" : "date",
-                "format" : "YYYY-MM-DD"
             }
         }
     }
 }'
+
